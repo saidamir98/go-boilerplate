@@ -2,7 +2,6 @@ package models
 
 import (
 	"log"
-	"os"
 	"time"
 
 	_ "github.com/jackc/pgx/stdlib"
@@ -21,7 +20,7 @@ func InitDB() {
 		err error
 	)
 
-	dbUri := os.Getenv("DATABASE_URL")
+	dbUri := app.Conf["DATABASE_URL"]
 
 	app.DB, err = sqlx.Connect("pgx", dbUri)
 	if err != nil {

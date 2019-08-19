@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/joho/godotenv"
 	app "github.com/saidamir98/go-boilerplate/app"
@@ -24,7 +23,7 @@ func init() {
 }
 
 func main() {
-	port := os.Getenv("PORT")
+	port := app.Conf["PORT"]
 
 	http.Handle("/", routes.Handlers())
 
