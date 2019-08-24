@@ -16,20 +16,15 @@ type BaseModel struct {
 }
 
 func InitDB() {
-	var (
-		err error
-	)
+	var err error
 
-	dbUri := app.Conf["DATABASE_URL"]
-
-	app.DB, err = sqlx.Connect("pgx", dbUri)
+	app.DB, err = sqlx.Connect("pgx", app.Conf["DATABASE_URL"])
 	if err != nil {
 		log.Fatalf("%+v", err)
 	}
 	if err = app.DB.Ping(); err != nil {
 		log.Fatalf("%+v", err)
 	}
-
 	log.Println("connected db...")
 
 	_, err = app.DB.Exec(Schemas)
